@@ -1,1 +1,37 @@
 sjtu IEEE选导师系统及学生个人信息网站
+###############################
+共用文件
+##############################
+login.php: 导师学生登录界面
+loginDb.php: 获取登录信息
+pwd.php: 密码修改界面
+pwdDb.php: 传入数据库
+logout.php: 注销
+
+##############################
+学生文件
+##############################
+ccMtDb.php: 取消已经选择的导师,当双方都确认时,不可以再取消
+cfMtDb.php: 当导师答应后,学生确认选择,即双方都确认
+failedMt.php: 学生被老师拒绝记录
+myMentor.php: 我的导师个人界面
+sltMtDb.php: 选择导师
+sltRecordMt.php: 学生选择记录，就是3个选择的导师的确认状态
+studentDetail.php: 学生详细信息
+studentSelf.php: 学生个人主页
+studentUpdate.php: 学生更新信息页面
+studentUpdateDb.php: 学生更新信息数据库
+
+############################
+导师文件
+############################
+ccStDb.php: 导师拒绝学生
+mentorDetail.php: 导师详细信息
+mentorList.php: 导师列表
+mentorSelf.php: 导师个人页面
+mentorUpdate.php: 导师更新信息页面
+mentorUpdateDb.php: 导师更新信息数据库
+myStudent.php: 导师的双方确认的学生
+sltStDb.php: 导师选择学生
+sltRecordSt.php: 已选择我的学生记录
+
