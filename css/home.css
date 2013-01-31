@@ -1,0 +1,73 @@
+
+.navvbox {
+	position:absolute;
+	top:20px;
+	left:10px;
+}
+.navheader {
+	position:relative;
+	left:10px;
+	color:	#737373;
+}
+ul.navvul{
+	list-style: none;
+	display: block;
+	width: 200px;
+	position: relative;
+	top: 10px;
+	left: 10px;
+	padding: 60px 0 60px 0;
+	background: url("../img/shad2.png") no-repeat;
+	-webkit-background-size: 50% 100%;
+}
+
+ul.navvul li {
+	margin: 5px 0 0 0;
+}
+
+
+ul.navvul li span {
+	-webkit-transition: all 0.3s ease-out;
+	background: #FF4040 url("../img/border.png") no-repeat;
+	color: #eeffff;
+	padding: 7px 15px 7px 50px;
+	-webkit-border-top-right-radius: 10px;
+ 	-webkit-border-bottom-right-radius: 10px;
+	width: 100px;
+	display: block;
+	text-decoration: none;
+	-webkit-box-shadow: 2px 2px 4px #888;
+}
+ul.navvul li.activing span{
+	background:#FFE1FF url("../img/border.png") no-repeat;
+	color: #111111;
+	padding: 7px 10px 7px 25px;
+}
+
+ul.navvul li span:hover {
+	background:#FFE1FF url("../img/border.png") no-repeat;
+	color: #111111;
+	font-size:17px;
+	padding: 7px 25px 7px 60px;
+} 
+
+.selfphoto{
+	position:relative;
+	left:5%;
+	width:360px;
+	
+}
+/* 	padding-left:70px; */
+}
+
+.selfinfo{
+}
+
+
+#multiplexdiv {
+	margin-top:5%;
+	width:70%;
+	background-color:#FFFFEF;
+}
+
+
