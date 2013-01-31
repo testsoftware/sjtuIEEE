@@ -1,83 +1,43 @@
-function getall(){
-	$.get('../php/getmentorlist.php',{'range':'all','ISAJAX':'AJAX'},function(data,status){
+function getmentortype(mentortype){
+	$.get('../php/getmentorlist.php',{'range':mentortype,'ISAJAX':'AJAX'},function(data,status){
 		if(status == 'success'){
 			$("#mentorlistdiv").html(data);
+			$("#listtype").val(mentortype);
 		}
 		else{
-			window.location.href = '../php/getmentorlist.php';
+			alert(status);
 		}
 	});
 }
+
 $(document).ready(function(){
-	getall();
+	getmentortype('all');
 	$('#allmentor').click(function(){
-		getall();
+		getmentortype('all');
 		return false;
 	});
 	$('#csmentor').click(function(){
-		$.get('../php/getmentorlist.php',{'range':'cs','ISAJAX':'AJAX'},function(data,status){
-		if(status == 'success'){
-			$("#mentorlistdiv").html(data);
-		}
-		else{
-			window.location.href = '../php/getmentorlist.php';
-		}
-		});
+		getmentortype('cs');
 		return false;
 	});
 	$('#itmentor').click(function(){
-		$.get('../php/getmentorlist.php',{'range':'it','ISAJAX':'AJAX'},function(data,status){
-		if(status == 'success'){
-			$("#mentorlistdiv").html(data);
-		}
-		else{
-			window.location.href = '../php/getmentorlist.php';
-		}
-		});
+		getmentortype('it');
 		return false;
 	});
 	$('#atmentor').click(function(){
-		$.get('../php/getmentorlist.php',{'range':'at','ISAJAX':'AJAX'},function(data,status){
-		if(status == 'success'){
-			$("#mentorlistdiv").html(data);
-		}
-		else{
-			window.location.href = '../php/getmentorlist.php';
-		}
-		});
+		getmentortype('at');
 		return false;
 	});
 	$('#iementor').click(function(){
-		$.get('../php/getmentorlist.php',{'range':'ie','ISAJAX':'AJAX'},function(data,status){
-		if(status == 'success'){
-			$("#mentorlistdiv").html(data);
-		}
-		else{
-			window.location.href = '../php/getmentorlist.php';
-		}
-		});
+		getmentortype('ie');
 		return false;
 	});
 	$('#eementor').click(function(){
-		$.get('../php/getmentorlist.php',{'range':'ee','ISAJAX':'AJAX'},function(data,status){
-		if(status == 'success'){
-			$("#mentorlistdiv").html(data);
-		}
-		else{
-			window.location.href = '../php/getmentorlist.php';
-		}
-		});
+		getmentortype('ee');
 		return false;
 	});
 	$('#elmentor').click(function(){
-		$.get('../php/getmentorlist.php',{'range':'el','ISAJAX':'AJAX'},function(data,status){
-		if(status == 'success'){
-			$("#mentorlistdiv").html(data);
-		}
-		else{
-			window.location.href = '../php/getmentorlist.php';
-		}
-		});
+		getmentortype('el');
 		return false;
 	});
 	

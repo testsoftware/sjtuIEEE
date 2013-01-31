@@ -4,11 +4,16 @@ if($_GET['ISAJAX'] != 'AJAX' ) {
 }
 session_start();
 if (isset($_SESSION['id'])){
+	if($_SESSION['idtype']!='student'){
+		session_destroy();
+		exit('You have no authority to access this document,please login again');
+	}
 	$id = $_SESSION['id'];	
 }
 else{
 	echo "<script>alert('请登录!');</script>";
 	echo "<script>window.location.href='login.php'</script>";
+	exit("error");
 }
 ?>
 <!DOCTYPE html >

@@ -11,6 +11,7 @@ if (isset($_SESSION['username'])){
 else{
 	echo "<script>alert('请登录!');</script>";
 	echo "<script>window.location.href='login.php'</script>";
+	exit('error');
 }
 ?>
 

@@ -83,7 +83,11 @@ function setselect($subject,$direction){
 				}
 		}
 }
-if (isset($_SESSION['username'])){	
+if (isset($_SESSION['username'])){
+	if($_SESSION['idtype']!='student'){
+		session_destroy();
+		exit('You have no authority to access this document, please login again');
+	}
 	$username = $_SESSION['username'];
 	$id = $_SESSION['id'];
 	$idtype = $_SESSION['idtype'];
@@ -119,11 +123,17 @@ if (isset($_SESSION['username'])){
 else{
 	echo "<script>alert('请登录!');</script>";
 	echo "<script>window.location.href='login.php'</script>";
+	exit('error');
 }
 ?>
 
+<!DOCTYPE html>
+<html  lang='zh-CN'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="../js/studentUpdate.js"></script>
-
+</head>
+<body>
 <div class="container span8">
   <form action="../php/studentUpdateDb.php" class="form-horizontal" method="post" id="studentUpdateform">
    <fieldset> 
@@ -259,3 +269,5 @@ for($i=1;$i<=$numfcourse;$i++){
     </fieldset> 
   </form>
 </div>
+</body>
+</html>

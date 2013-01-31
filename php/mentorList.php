@@ -19,7 +19,9 @@ if($_GET['ISAJAX'] != 'AJAX' ) {
 <button class="btn-success btn" id="elmentor">电气系导师</button>
 <button class="btn-success btn" id="eementor">电子科技系导师</button>
 </div>
+<input id="listtype" type="hidden" val="all" />
 <div id="mentorlistdiv" style="margin-top:50px;">
+
 </div>
  <script src="../js/mentorlist.js"></script>
 </body>

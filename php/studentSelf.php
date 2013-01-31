@@ -1,6 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['id'])){
+	if($_SESSION['idtype']!='student'){
+		session_destroy();
+		exit('You have no authority to access this document,please login again');
+	}
 	$username = $_SESSION['username'];
 	$id = $_SESSION['id'];
 	$photo = $_SESSION['photo'];
@@ -8,6 +12,7 @@ if (isset($_SESSION['id'])){
 else{
 	echo "<script>alert('请登录!');</script>";
 	echo "<script>window.location.href='login.php'</script>";
+	exit('error');
 }
 ?>
 <!DOCTYPE html>
@@ -45,7 +50,6 @@ body{
               <?php echo "<img src='../".$photo."' style=\"height:30px;\" />"; ?>
               <a href="#" class="navbar-link" id="id"><?php echo $id; ?></a>
             </p>
-            
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -71,7 +75,6 @@ body{
             </ul>
         </div>
 
-        	
         <div class="offset3" id="multiplexdiv">
         </div>
     <script src="../assets/js/jquery-1.8.3.min.js"></script>

@@ -1,6 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['id'])){
+	if($_SESSION['idtype']!='student'){
+		session_destroy();
+		exit(htmlspecialchars(json_encode(array('error'=>'iderror')),ENT_NOQUOTES));
+	}
 	$id = $_SESSION['id'];
 	$mtid = $_POST['mtid'];
 	$conn = mysql_connect("localhost","IEEE","IEEE2011") or die("Could not connect:".mysql_error());
@@ -13,14 +17,14 @@ if (isset($_SESSION['id'])){
 			$sql = "UPDATE selectRlt SET 导师一=null,状态一=0 WHERE id='$id' ";
 			//mysql_query($sql, $conn);
 			if (!mysql_query($sql, $conn)){
-				echo "<script>alert('error');</script>";
+				echo htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES);
 			}
 			else{
-				echo "<script>alert('成功!');</script>";
+				echo htmlspecialchars(json_encode(array('success'=>TRUE)),ENT_NOQUOTES);
 			}
 		}
 		else{
-			echo "<script>alert('wrong');</script>";
+			echo htmlspecialchars(json_encode(array('error'=>'statuserror')),ENT_NOQUOTES);
 		}
 	}
 	elseif($row['导师二'] == $mtid){
@@ -28,14 +32,14 @@ if (isset($_SESSION['id'])){
 			$sql = "UPDATE selectRlt SET 导师二=null,状态二=0 WHERE id='$id' ";
 			//mysql_query($sql, $conn);
 			if (!mysql_query($sql, $conn)){
-				echo "<script>alert('error');</script>";
+				echo htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES);
 			}
 			else{
-				echo "<script>alert('成功!');</script>";
+				echo htmlspecialchars(json_encode(array('success'=>TRUE)),ENT_NOQUOTES);
 			}
 		}
 		else{
-			echo "<script>alert('wrong');</script>";
+			echo htmlspecialchars(json_encode(array('error'=>'statuserror')),ENT_NOQUOTES);
 		}
 	}
 	elseif($row['导师三'] == $mtid){
@@ -43,24 +47,23 @@ if (isset($_SESSION['id'])){
 			$sql = "UPDATE selectRlt SET 导师三=null,状态三=0 WHERE id='$id' ";
 			//mysql_query($sql, $conn);
 			if (!mysql_query($sql, $conn)){
-				echo "<script>alert('error');</script>";
+				echo htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES);
 			}
 			else{
-				echo "<script>alert('成功!');</script>";
+				echo htmlspecialchars(json_encode(array('success'=>TRUE)),ENT_NOQUOTES);
 			}
 		}
 		else{
-			echo "<script>alert('error');</script>";
+			echo htmlspecialchars(json_encode(array('error'=>'statuserror')),ENT_NOQUOTES);
 		}
 	}
 	else{
-		echo "<script>alert('wrong');</script>";
+		echo htmlspecialchars(json_encode(array('error'=>'mentoriderror')),ENT_NOQUOTES);
 	}
 	mysql_close($conn);
 }
 else{
-	echo "<script>alert('请登录!');</script>";
-	echo "<script>window.location.href='login.php'</script>";
+	echo htmlspecialchars(json_encode(array('error'=>'nologin')),ENT_NOQUOTES);
 }
 ?> 
  

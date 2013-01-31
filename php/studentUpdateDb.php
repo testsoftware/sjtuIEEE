@@ -1,6 +1,10 @@
 <?php
 session_start();
 if(isset($_SESSION['id'])){
+	if($_SESSION['idtype']!='student'){
+		session_destroy();
+		exit(htmlspecialchars(json_encode(array('error'=>'iderror')),ENT_NOQUOTES));
+	}
 	$id = $_SESSION["id"];
 	$class = $_POST["class"];
 	$grade = $_POST["grade"];
@@ -35,15 +39,15 @@ if(isset($_SESSION['id'])){
 	mysql_query("SET NAMES UTF8");
 	$sql = "UPDATE student SET 班级='$class',年级='$grade',学积分=$gpa,排名=$rank,简介='$introduction',手机号码='$phone',email='$email',主修专业='$majorsubject',主修方向一='$majordirection',主修方向二='$majordirection2',辅修专业='$minorsubject',辅修方向='$minordirection',挂科数=$numfcourse,挂科科目='$namefcourse',挂科说明='$whyfcourse' WHERE id='$id' ";
 	if (!mysql_query($sql, $conn)){
-		echo "error";
+		echo htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES);
 	}
 	else{
-		echo "success";
+		echo htmlspecialchars(json_encode(array('success'=>TRUE)),ENT_NOQUOTES);
 	}
 	mysql_close($conn);
 }
 else{
-	echo "nologin";
+	echo htmlspecialchars(json_encode(array('error'=>'nologin')),ENT_NOQUOTES);
 }
 
 ?>

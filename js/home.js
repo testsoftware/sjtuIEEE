@@ -18,11 +18,12 @@ $(document).ready(function(){
 				$("#multiplexdiv").html(data) ;
 			}
 			else{
-				window.location.href = '../php/studentUpdate.php';
+				alert(status);
 			}
 		});
 		return false;
 	});
+	
 	$('#updatephoto').click(function(){
 		$('.activing').addClass('pending');
 		$('.activing').removeClass('activing');
@@ -33,28 +34,12 @@ $(document).ready(function(){
 				$("#multiplexdiv").html(data) ;
 			}
 			else{
-				window.location.href = '../php/updatePhoto.php';
+				alert(status);
 			}
 		});
 		return false;
 	});
 	
-// 	更改密码
-	$('#password').click(function(){
-		$('.activing').addClass('pending');
-		$('.activing').removeClass('activing');
-                $(this).addClass('activing');
-		$(this).removeClass('pending');
-		$.get('../php/pwd.php',function(data,status){
-			if(status == 'success'){
-				$("#multiplexdiv").html(data);
-			}
-			else{
-				window.location.href = '../php/pwd.php';
-			}
-		});
-		return false;
-	});
 	
 	$('#myMentor').click(function(){
 		$('.activing').addClass('pending');
@@ -66,7 +51,7 @@ $(document).ready(function(){
 				$("#multiplexdiv").html(data) ;
 			}
 			else{
-				window.location.href = '../php/myMentor.php';
+				alert(status);
 			}
 		});
 		return false;
@@ -83,7 +68,7 @@ $(document).ready(function(){
 				$("#multiplexdiv").html(data) ;
 			}
 			else{
-				window.location.href = '../php/mentorList.php';
+				alert(status);
 			}
 		});
 		return false;
@@ -99,7 +84,7 @@ $(document).ready(function(){
 				$("#multiplexdiv").html(data) ;
 			}
 			else{
-				window.location.href = '../php/sltRecordMt.php';
+				alert(status);
 			}
 		});
 		return false;
@@ -114,13 +99,14 @@ $(document).ready(function(){
 				$("#multiplexdiv").html(data);
 			}
 			else{
-				window.location.href = '../php/failedMt.php';
+				alert(status);
 			}
 		});
 		return false;
 	});
 });
 
+// 获取个人信息
 function jumpToinfo(){
 	$('.activing').addClass('pending');
 	$('.activing').removeClass('activing');
@@ -131,7 +117,7 @@ function jumpToinfo(){
 			$("#multiplexdiv").html(data);
 		}
 		else{
-			window.location.href = '../php/information.php';
+			alert(status);
 		}
 	});
 	return false;

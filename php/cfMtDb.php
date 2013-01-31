@@ -6,20 +6,17 @@ function update($row,$mtid,$id,$conn,$mt2,$st2,$mt3,$st3){
 	if($rowmentor['学生一'] == $id){
 		$sql = "UPDATE mentorselectRlt SET 状态一=2 WHERE id='$mtid'";
 		if (!mysql_query($sql, $conn)){
-			echo "<script>alert('失败');</script>";
-			exit('error!');
+			exit(htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES));
 		}
 	}
 	elseif($rowmentor['学生二'] == $id){
 		$sql = "UPDATE mentorselectRlt SET 状态二=2 WHERE id='$mtid'";
 		if (!mysql_query($sql, $conn)){
-			echo "<script>alert('失败');</script>";
-			exit('error!');
+			exit(htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES));
 		}
 	}
 	else{
-		echo "<script>alert('your mentor is invalid!');</script>";
-		exit('your mentor is invalid!');
+		exit(htmlspecialchars(json_encode(array('error'=>'mentoriderror')),ENT_NOQUOTES));
 	}
 	
 // 		需要在导师的失败记录中添加信息如果状态为2
@@ -53,11 +50,15 @@ function update($row,$mtid,$id,$conn,$mt2,$st2,$mt3,$st3){
 	}
 	$sql = "UPDATE selectRlt SET ".$mt3."=null,".$st3."=0 WHERE id='$id' ";
 	mysql_query($sql, $conn);
-	echo "<script>alert('success!');</script>";
+	echo htmlspecialchars(json_encode(array('success'=>TRUE)),ENT_NOQUOTES);
 }
 
 
 if (isset($_SESSION['id'])){
+	if($_SESSION['idtype']!='student'){
+		session_destroy();
+		exit(htmlspecialchars(json_encode(array('error'=>'iderror')),ENT_NOQUOTES));
+	}
 	$id = $_SESSION['id'];
 	$mtid = $_POST['mtid'];
 	$conn = mysql_connect("localhost","IEEE","IEEE2011") or die("Could not connect:".mysql_error());
@@ -66,70 +67,54 @@ if (isset($_SESSION['id'])){
 	$sql= mysql_query("SELECT * FROM selectRlt where id='$id'");
 	$row = mysql_fetch_assoc($sql);
 	if($row['导师一'] == $mtid){
-		if($row['状态一'] < 2){
-			echo "<script>alert('wrong with your mentor status!');</script>";
-			exit("failed!");
-		}
-		elseif($row['状态一'] == 2){
+		if($row['状态一'] == 2){
 			$sql = "UPDATE selectRlt SET 确定导师='$mtid',状态一=3 WHERE id='$id' ";
 			if (!mysql_query($sql, $conn)){
-				echo "<script>alert('error');</script>";
-				exit("error");
+				exit(htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES));
 			}
 			else{
 				update($row,$mtid,$id,$conn,'导师二','状态二','导师三','状态三');
 			}
 		}
 		else{
-			echo "<script>alert('wrong');</script>";
+			exit(htmlspecialchars(json_encode(array('error'=>'statuserror')),ENT_NOQUOTES));
 		}
 	}
 	elseif($row['导师二'] == $mtid){
-		if($row['状态二'] < 2){
-			echo "<script>alert('wrong with your mentor status!');</script>";
-			exit("failed!");
-		}
-		elseif($row['状态二'] == 2){
+		if($row['状态二'] == 2){
 			$sql = "UPDATE selectRlt SET 确定导师='$mtid',状态二=3 WHERE id='$id' ";
 			if (!mysql_query($sql, $conn)){
-				echo "<script>alert('error');</script>";
-				exit("error");
+				exit(htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES));
 			}
 			else{
 				update($row,$mtid,$id,$conn,'导师一','状态一','导师三','状态三');
 			}
 		}
 		else{
-			echo "<script>alert('wrong');</script>";
+			exit(htmlspecialchars(json_encode(array('error'=>'statuserror')),ENT_NOQUOTES));
 		}
 	}
 	elseif($row['导师三'] == $mtid){
-		if($row['状态三'] < 2){
-			echo "<script>alert('wrong with your mentor status!');</script>";
-			exit("failed!");
-		}
-		elseif($row['状态三'] == 2){
+		if($row['状态三'] == 2){
 			$sql = "UPDATE selectRlt SET 确定导师='$mtid',状态三=3 WHERE id='$id' ";
 			if (!mysql_query($sql, $conn)){
-				echo "<script>alert('error');</script>";
-				exit("error");
+				exit(htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES));
 			}
 			else{
 				update($row,$mtid,$id,$conn,'导师二','状态二','导师一','状态一');
 			}
 		}
 		else{
-			echo "<script>alert('wrong');</script>";
+			exit(htmlspecialchars(json_encode(array('error'=>'statuserror')),ENT_NOQUOTES));
 		}
 	}
 	else{
-		echo "<script>alert('wrong');</script>";
+		echo htmlspecialchars(json_encode(array('error'=>'mentoriderror')),ENT_NOQUOTES);
 	}
 	mysql_close($conn);
 }
 else{
-	echo "<script>alert('请登录!');</script>";
-	echo "<script>window.location.href='login.php'</script>";
+	echo htmlspecialchars(json_encode(array('error'=>'nologin')),ENT_NOQUOTES);
 }
 ?> 
  

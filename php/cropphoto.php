@@ -63,15 +63,14 @@ function resizeImage($popimage, $tmpimage,$popwidth,$popheight, $width, $height,
 	mysql_query("SET NAMES UTF8");
 	$sql = "UPDATE ".$idtype." SET photo='$popimage' WHERE id='$id'";
 	if (!mysql_query($sql, $conn)){
-		echo "error";
+		echo htmlspecialchars(json_encode(array('error'=>'sqlerror')),ENT_NOQUOTES);
 	}
 	else{
-		echo "success";
-		$_SESSION['photo'] = $popimage;
+		echo htmlspecialchars(json_encode(array('success'=>TRUE)),ENT_NOQUOTES);
 	}
 	mysql_close($conn);
 }
 else{
-	echo "nologin";
+	echo htmlspecialchars(json_encode(array('error'=>'nologin')),ENT_NOQUOTES);
 }
 ?>

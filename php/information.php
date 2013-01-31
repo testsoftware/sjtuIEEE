@@ -1,8 +1,8 @@
 <?php
-session_start();
 if($_GET['ISAJAX'] != 'AJAX' ) {
 	exit('There are some mistakes in your request. Do not input links directly. Please get access to the page through your homepage!');
 }
+session_start();
 if (isset($_SESSION['id'])){
 	if($_SESSION['idtype'] == 'mentor'){
 		$username = $_SESSION['username'];

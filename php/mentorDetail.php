@@ -106,15 +106,16 @@ else{
 			echo "双方已确认;";
 		}
  	}
-
- 	echo "<button id='goback' > 返回</button>";
+	if($_GET['fromurl'] == 'mentorlist'){
+		echo "<button id='goback' > 返回</button>";
+ 	}
  	mysql_close($conn);
 ?>
 <script src="../js/selectmt.js"></script>
 <script>
 $(document).ready(function(){
 	$('#goback').click(function(){
-		getall();
+		getmentortype($('#listtype').val());
 	});
 });
 </script>

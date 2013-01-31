@@ -72,14 +72,18 @@ else{
  	echo "<input type='submit' value='详细' class='getmentorDetailform' /> </td>";
  	echo "</form>";
  	
- 	$sqlmentor = mysql_query("SELECT 学生一,学生二 FROM mentorselectRlt where id='".$row['id']."'");
+ 	$sqlmentor = mysql_query("SELECT * FROM mentorselectRlt where id='".$row['id']."'");
 	$rowmentor = mysql_fetch_assoc($sqlmentor);
 	$studentnum = 0;
 	if(!empty($rowmentor['学生一'])){
-		$studentnum ++;
+		if($rowmentor['状态一']==2){
+			$studentnum ++;
+		}
 	}
 	if(!empty($rowmentor['学生二'])){
-		$studentnum ++;
+		if($rowmentor['状态二']==2){
+			$studentnum ++;
+		}
 	}
 	echo "<td>$studentnum</td>";
  	if($idtype != 0){

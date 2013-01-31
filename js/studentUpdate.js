@@ -35,26 +35,35 @@ $(document).ready(function(){
 			return false;
 		}
 		formdata=$('#studentUpdateform').serialize();
-		$.post('../php/studentUpdateDb.php',formdata,function(data){
-			if(data == 'error'){
-				alert('错误');
-			}
-			else if(data=='nologin'){
-				alert('请登录');
-				window.location.replace('../php/login.php');
-			}
-			else{
-				alert('成功');
-				$.get('../php/studentUpdate.php',{'ISAJAX':'AJAX'},function(data,status){
-				if(status == 'success'){
-					$("#multiplexdiv").html(data) ;
+		$.post('../php/studentUpdateDb.php',formdata,function(data,status){
+			if(status == 'success'){
+				if(data.success){
+					alert('成功');
+					$.get('../php/studentUpdate.php',{'ISAJAX':'AJAX'},function(data,status){
+						if(status == 'success'){
+							$("#multiplexdiv").html(data) ;
+						}
+						else{
+							alert(status);
+						}
+					});
+				}
+				else if(data.error == 'iderror'){
+					alert('身份有误');
+					window.location.replace('../php/login.php');
+				}
+				else if(data.error=='nologin'){
+					alert('请登录');
+					window.location.replace('../php/login.php');
 				}
 				else{
-					window.location.href = '../php/studentUpdate.php';
+					alert('数据库错误');
 				}
-				});
 			}
-		});
+			else{
+				alert(status);
+			}
+		},"json");
 		return false;
 	}); 
 	$('select[name=majorsubject]').change(function(){
