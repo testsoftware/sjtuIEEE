@@ -1,33 +1,47 @@
 sjtu IEEE选导师系统及学生个人信息网站
+
+php文件夹
 ###############################
 共用文件
 ##############################
 login.php: 导师学生登录界面
 loginDb.php: 获取登录信息
+logout.php: 注销
+
 pwd.php: 密码修改界面
 pwdDb.php: 传入数据库
-logout.php: 注销
+checkpwdDb.php：在该密码时核对密码
+
+cropphoto.php:接收裁剪图片的4个坐标，并另存为xxxx.jpg
+deletephoto.php:第2次上传图片时删除前一次上传的图
+updatePhoto.php:上传照片的初始界面
+uploaderclass.php:ajax上传文件需要的类  //注意需要把php.ini里的post_max_size,fileupload_max_size改为20m,10m
+uptmpphoto.php:上传没有裁剪过的图片
 
 ##############################
 学生文件
 ##############################
 ccMtDb.php: 取消已经选择的导师,当双方都确认时,不可以再取消
 cfMtDb.php: 当导师答应后,学生确认选择,即双方都确认
+rejectMtDb.php: 导师确认后拒绝
 failedMt.php: 学生被老师拒绝记录
 myMentor.php: 我的导师个人界面
+mentorDetail.php: 导师详细信息
 sltMtDb.php: 选择导师
 sltRecordMt.php: 学生选择记录，就是3个选择的导师的确认状态
-studentDetail.php: 学生详细信息
 studentSelf.php: 学生个人主页
 studentUpdate.php: 学生更新信息页面
 studentUpdateDb.php: 学生更新信息数据库
+mentorList.php: 导师列表界面，默认是全部导师
+getmentorlist.php: 获取导师名单，分别有全部，cs，ee等
+information.php:获取学生个人信息，使用ajax
+
 
 ############################
 导师文件
 ############################
 ccStDb.php: 导师拒绝学生
-mentorDetail.php: 导师详细信息
-mentorList.php: 导师列表
+studentDetail.php: 学生详细信息
 mentorSelf.php: 导师个人页面
 mentorUpdate.php: 导师更新信息页面
 mentorUpdateDb.php: 导师更新信息数据库
@@ -35,3 +49,24 @@ myStudent.php: 导师的双方确认的学生
 sltStDb.php: 导师选择学生
 sltRecordSt.php: 已选择我的学生记录
 
+
+js文件夹
+ajaxlogin.js: 负责登录界面的密码核对和session设置
+ajaxphoto.js: 上传照片
+fileuploader.js: 下载的上传文件插件
+home.js:学生的个人界面的javascript，主要是获取ajax
+imgareaselect.js: 下载的裁剪图片的插件
+mentorlist.js: 根据情况获取导师名单
+mentorSelf.js: 导师个人页面
+menUpdateInfo.js: 导师更新信息
+pwdRank.js: 检测密码强度
+pwdTest.js: 更改密码时，核对信息
+selectmt.js: 选择导师的js
+selectst.js: 选择学生的js
+studentUpdate.js: 学生更新信息
+
+
+Thanks to：
+http://valums-file-uploader.github.com/file-uploader/
+http://odyniec.net/projects/imgareaselect/
+https://github.com/fnando/password_strength
