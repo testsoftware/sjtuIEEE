@@ -112,20 +112,28 @@ function ajaxupload(){
 $(document).ready(function(){
 	$("#myphotosubmit").click(function(){
 		formdata = $('#cropphotoform').serialize();
-		$.post('../php/cropphoto.php',formdata,function(data){
-			if(data == "success"){
-				alert("成功");
-				jumpToinfo();
-			}
-			else if(data == "nologin"){
-				alert('请登录');
-				window.location.replace('../php/login.php');
+		$.post('../php/cropphoto.php',formdata,function(data,status){
+			if(status == 'success'){
+				if(data.success){
+					alert('成功');
+					jumpToinfo();
+				}
+				else if(data.error == 'iderror'){
+					alert('身份有误');
+					window.location.replace('../php/login.php');
+				}
+				else if(data.error=='nologin'){
+					alert('请登录');
+					window.location.replace('../php/login.php');
+				}
+				else{
+					alert('数据库错误');
+				}
 			}
 			else{
-				alert(data);
+				alert(status);
 			}
-		});
+		},"json");
 		return false;
 	});
-
 });
